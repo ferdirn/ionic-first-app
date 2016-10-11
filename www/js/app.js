@@ -23,7 +23,7 @@ angular.module('starter', ['ionic'])
   });
 })
 
-.controller('TodoCtrl', function($scope, $ionicPopup) {
+.controller('TodoCtrl', function($scope, $ionicPopup, $ionicListDelegate) {
   $scope.tasks = [
     {title: "First", completed: true},
     {title: "Second", completed: false},
@@ -40,6 +40,18 @@ angular.module('starter', ['ionic'])
       // promise
       if (res)
         $scope.tasks.push({title: res, completed: false});
+    })
+  };
+
+  $scope.edit = function(task) {
+    $scope.data = { response: task.title };
+    $ionicPopup.prompt({
+      title: "Edit Task",
+      scope: $scope
+    }).then(function(res) {
+      if (res !== undefined)
+        task.title = $scope.data.response;
+        $ionicListDelegate.closeOptionButtons();
     })
   };
 })
