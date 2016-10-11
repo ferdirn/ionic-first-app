@@ -22,3 +22,24 @@ angular.module('starter', ['ionic'])
     }
   });
 })
+
+.controller('TodoCtrl', function($scope, $ionicPopup) {
+  $scope.tasks = [
+    {title: "First", completed: true},
+    {title: "Second", completed: false},
+    {title: "Third", completed: false},
+  ];
+
+  $scope.newTask = function() {
+    $ionicPopup.prompt({
+      title: "New Task",
+      template: "Enter task:",
+      inputPlaceholder: "What do you need to do?",
+      okText: "Create task"
+    }).then(function(res) {
+      // promise
+      if (res)
+        $scope.tasks.push({title: res, completed: false});
+    })
+  };
+})

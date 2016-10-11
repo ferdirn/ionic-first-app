@@ -32,19 +32,23 @@
     <!-- your app's js -->
     <script src="js/app.js"></script>
   </head>
-  <body ng-app="starter">
+  <body ng-app="starter" ng-controller="TodoCtrl">
 
     <ion-pane>
       <ion-header-bar class="bar-royal">
-        <h1 class="title">Ionic Blank</h1>
+        <h1 class="title">Todo List</h1>
+        <button class="button button-icon" ng-click="newTask()">
+          <i class="ion-compose icon"></i>
+        </button>
       </ion-header-bar>
       <ion-content>
         <ion-list>
-          <ion-item>Item 1</ion-item>
-          <ion-item>Item 2</ion-item>
-          <ion-item>Item 3</ion-item>
-          <ion-item>Item 4</ion-item>
-          <ion-item>Item 5</ion-item>
+          <ion-item ng-repeat="task in tasks"
+                    class="item-icon-right"
+                    ng-class="{complete: task.completed}"
+                    ng-click="task.completed = !task.completed">
+            {{task.title}}
+          </ion-item>
         </ion-list>
       </ion-content>
     </ion-pane>
